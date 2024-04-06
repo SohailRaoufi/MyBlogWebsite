@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from forms import CreatePostForm, RegisterUser, LoginUser, CommentForm
+from Ahmad_Sohail_Blog.forms.forms import CreatePostForm, RegisterUser, LoginUser, CommentForm
 #from flask_gravatar import Gravatar
 from functools import wraps
 import os
@@ -18,7 +18,8 @@ ckeditor = CKEditor(app)
 Bootstrap(app)
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://blog_mo91_user:V51LcTSHzltjWGOiwOrl70zRaHVndHNL@dpg-co8nasol5elc73921p9g-a/blog_mo91'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+#postgres://blog_mo91_user:V51LcTSHzltjWGOiwOrl70zRaHVndHNL@dpg-co8nasol5elc73921p9g-a.oregon-postgres.render.com/blog_mo91
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
