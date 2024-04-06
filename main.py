@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
-from Ahmad_Sohail_Blog.forms.forms import CreatePostForm, RegisterUser, LoginUser, CommentForm
+from forms.forms import CreatePostForm, RegisterUser, LoginUser, CommentForm
 #from flask_gravatar import Gravatar
 from functools import wraps
 import os
