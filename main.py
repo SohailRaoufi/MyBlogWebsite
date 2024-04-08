@@ -8,7 +8,6 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms.forms import CreatePostForm, RegisterUser, LoginUser, CommentForm
-#from flask_gravatar import Gravatar
 from functools import wraps
 import os
 
@@ -93,12 +92,12 @@ def get_all_posts():
 def register():
     reg_form = RegisterUser()
     if reg_form.validate_on_submit():
-        check_email = User.query.filter_by(email=reg_form.email.data).first()
+        check_email = User.query.filter_by(email=reg_form.email.data).first().strip()
         if not check_email:
-            password = reg_form.password.data
+            password = reg_form.password.data.strip()
             hashed_password = generate_password_hash(password,'pbkdf2:sha256', 8)
             new_user = User(
-                email = reg_form.email.data,
+                email = reg_form.email.data.strip(),
                 password = hashed_password,
                 name = reg_form.name.data
             )
@@ -117,8 +116,8 @@ def register():
 def login():
     login_form = LoginUser()
     if login_form.validate_on_submit():
-        email = login_form.email.data
-        password = login_form.password.data
+        email = login_form.email.data.strip()
+        password = login_form.password.data.strip()
 
         user = User.query.filter_by(email = email).first()
 
