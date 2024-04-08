@@ -91,10 +91,10 @@ def get_all_posts():
 def register():
     reg_form = RegisterUser()
     if reg_form.validate_on_submit():
-        check_email = User.query.filter_by(email=reg_form.email.data).first().strip()
+        check_email = User.query.filter_by(email=reg_form.email.data).first()
         if not check_email:
-            password = reg_form.password.data.strip()
-            hashed_password = generate_password_hash(password,'pbkdf2:sha256', 8)
+            password = reg_form.password.data
+            hashed_password = generate_password_hash(password.strip(),'pbkdf2:sha256', 8)
             new_user = User(
                 email = reg_form.email.data.strip(),
                 password = hashed_password,
